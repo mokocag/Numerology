@@ -1,0 +1,99 @@
+import {
+  calculateBirthDay,
+  calculateExpression,
+  calculateHeartsDesire,
+  calculateLifePath,
+  calculateLifePathOfDay,
+  calculatePersonalMonth,
+  calculatePersonalYear,
+  calculatePersonality,
+  calculateSelectedDateLabel,
+  calculateUniversalMonth,
+  calculateUniversalYear
+} from './numerology/calculations.js';
+
+const elements = {
+  fullName: document.getElementById('fullName'),
+  birthDate: document.getElementById('birthDate'),
+  systemToggle: document.getElementById('systemToggle'),
+  selectedDate: document.getElementById('selectedDate'),
+  lifePath: document.getElementById('lifePath'),
+  birthDay: document.getElementById('birthDay'),
+  expression: document.getElementById('expression'),
+  heartsDesire: document.getElementById('heartsDesire'),
+  personality: document.getElementById('personality'),
+  universalYear: document.getElementById('universalYear'),
+  universalMonth: document.getElementById('universalMonth'),
+  personalYear: document.getElementById('personalYear'),
+  personalMonth: document.getElementById('personalMonth'),
+  lifePathOfDay: document.getElementById('lifePathOfDay'),
+  selectedDateDisplay: document.getElementById('selectedDateDisplay')
+};
+
+function formatDateInput(date) {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+}
+
+function parseDate(value) {
+  if (!value) return null;
+  const [year, month, day] = value.split('-').map(Number);
+  if (!year || !month || !day) return null;
+  return new Date(year, month - 1, day);
+}
+
+function displayValue(node, value) {
+  node.textContent = value ?? '—';
+}
+
+function updateCalculations() {
+  const system = elements.systemToggle.value;
+  const nameRaw = elements.fullName.value || '';
+  const hasNameLetters = /[a-zA-Z]/.test(nameRaw);
+  const birthDate = parseDate(elements.birthDate.value);
+  const selectedDate = parseDate(elements.selectedDate.value) || new Date();
+
+  const lifePath = birthDate ? calculateLifePath(birthDate) : null;
+  const birthDay = birthDate ? calculateBirthDay(birthDate) : null;
+  const expression = hasNameLetters ? calculateExpression(nameRaw, system) : null;
+  const heartsDesire = hasNameLetters ? calculateHeartsDesire(nameRaw, system) : null;
+  const personality = hasNameLetters ? calculatePersonality(nameRaw, system) : null;
+
+  const universalYear = calculateUniversalYear(selectedDate);
+  const universalMonth = calculateUniversalMonth(selectedDate);
+  const personalYear = birthDate ? calculatePersonalYear(birthDate, selectedDate) : null;
+  const personalMonth = birthDate ? calculatePersonalMonth(birthDate, selectedDate) : null;
+  const lifePathOfDay = birthDate ? calculateLifePathOfDay(birthDate, selectedDate) : null;
+
+  displayValue(elements.lifePath, lifePath);
+  displayValue(elements.birthDay, birthDay);
+  displayValue(elements.expression, expression);
+  displayValue(elements.heartsDesire, heartsDesire);
+  displayValue(elements.personality, personality);
+
+  displayValue(elements.universalYear, universalYear);
+  displayValue(elements.universalMonth, universalMonth);
+  displayValue(elements.personalYear, personalYear);
+  displayValue(elements.personalMonth, personalMonth);
+  displayValue(elements.lifePathOfDay, lifePathOfDay);
+  displayValue(elements.selectedDateDisplay, calculateSelectedDateLabel(selectedDate));
+}
+
+function init() {
+  const today = new Date();
+  elements.selectedDate.value = formatDateInput(today);
+  if (!elements.birthDate.value) {
+    elements.birthDate.value = formatDateInput(today);
+  }
+
+  updateCalculations();
+
+  elements.fullName.addEventListener('input', updateCalculations);
+  elements.birthDate.addEventListener('change', updateCalculations);
+  elements.systemToggle.addEventListener('change', updateCalculations);
+  elements.selectedDate.addEventListener('change', updateCalculations);
+}
+
+init();
