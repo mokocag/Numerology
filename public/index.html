@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Numerology Explorer</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="page-header">
+    <h1>Numerology Explorer</h1>
+    <p>Discover your core numbers and daily influences with ease.</p>
+  </header>
+
+  <main class="layout">
+    <section class="card inputs">
+      <h2>Profile Details</h2>
+      <label class="field">
+        <span>Full Name</span>
+        <input type="text" id="fullName" placeholder="e.g., Ada Lovelace" />
+      </label>
+      <label class="field">
+        <span>Date of Birth</span>
+        <input type="date" id="birthDate" />
+      </label>
+      <label class="field">
+        <span>Calculation System</span>
+        <select id="systemToggle">
+          <option value="pythagorean">Pythagorean</option>
+          <option value="chaldean">Chaldean</option>
+        </select>
+      </label>
+      <label class="field">
+        <span>Calendar Date</span>
+        <input type="date" id="selectedDate" />
+      </label>
+    </section>
+
+    <section class="card results">
+      <h2>Core Numbers</h2>
+      <div class="result-grid">
+        <div class="result-item">
+          <span class="result-label">Life Path</span>
+          <output id="lifePath">—</output>
+        </div>
+        <div class="result-item">
+          <span class="result-label">Birth Day</span>
+          <output id="birthDay">—</output>
+        </div>
+        <div class="result-item">
+          <span class="result-label">Expression</span>
+          <output id="expression">—</output>
+        </div>
+        <div class="result-item">
+          <span class="result-label">Heart&#39;s Desire</span>
+          <output id="heartsDesire">—</output>
+        </div>
+        <div class="result-item">
+          <span class="result-label">Personality</span>
+          <output id="personality">—</output>
+        </div>
+      </div>
+    </section>
+
+    <section class="card calendar">
+      <h2>Calendar Insights</h2>
+      <div class="result-grid">
+        <div class="result-item">
+          <span class="result-label">Universal Year</span>
+          <output id="universalYear">—</output>
+        </div>
+        <div class="result-item">
+          <span class="result-label">Universal Month</span>
+          <output id="universalMonth">—</output>
+        </div>
+        <div class="result-item">
+          <span class="result-label">Personal Year</span>
+          <output id="personalYear">—</output>
+        </div>
+        <div class="result-item">
+          <span class="result-label">Personal Month</span>
+          <output id="personalMonth">—</output>
+        </div>
+        <div class="result-item">
+          <span class="result-label">Life Path of the Day</span>
+          <output id="lifePathOfDay">—</output>
+        </div>
+        <div class="result-item">
+          <span class="result-label">Selected Date</span>
+          <output id="selectedDateDisplay">—</output>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="page-footer">
+    <p>Built for numerology explorations &mdash; update any field to refresh the insights.</p>
+  </footer>
+
+  <script type="module" src="../src/app.js"></script>
+</body>
+</html>
