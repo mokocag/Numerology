@@ -1,0 +1,12 @@
+{
+  "name": "numerology",
+  "version": "1.0.0",
+  "description": "Numerology calculations",
+  "main": "src/numerology/calculations.js",
+  "scripts": {
+    "test": "node --test"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT"
+}
